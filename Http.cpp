@@ -41,7 +41,7 @@
 #define HTTP_DATA "AT+HTTPDATA=%d,%d\r\n"
 #define HTTP_READ "AT+HTTPREAD\r\n"
 #define HTTP_CLOSE "AT+HTTPTERM\r\n"
-#define HTTP_CONTENT "AT+HTTPPARA=\"CONTENT\",\"application/json\"\r\n"
+#define HTTP_CONTENT "AT+HTTPPARA=\"CONTENT\",\"application/x-www-form-urlencoded\"\r\n"
 #define HTTPS_ENABLE "AT+HTTPSSL=1\r\n"
 #define HTTPS_DISABLE "AT+HTTPSSL=0\r\n"
 #define NORMAL_MODE "AT+CFUN=1,1\r\n"
@@ -202,7 +202,7 @@ Result HTTP::setHTTPSession(const char *uri){
   char httpPara[128];
   sprintf(httpPara, HTTP_PARA, uri);
 
-  if (sendCmdAndWaitForResp(httpPara, OK, 2000) == FALSE)
+  if (sendCmdAndWaitForResp(httpPara, OK, 3000) == FALSE)
     result = ERROR_HTTP_PARA;
 
   bool https = strncmp(HTTPS_PREFIX, uri, strlen(HTTPS_PREFIX)) == 0;
